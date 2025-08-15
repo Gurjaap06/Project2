@@ -1,0 +1,43 @@
+<%- include('../layout', { body: `
+<h2>All Players</h2>
+<form method="get" action="/players">
+  <input type="text" name="q" value="${q || ''}" placeholder="Search by name" />
+  <button>Search</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Team</th>
+      <th>Matches</th>
+      <th>Runs</th>
+      <th>Wkts</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    ${players.map(p => `
+    <tr>
+      <td><a href="/players/${p._id}">${p.name}</a></td>
+      <td>${p.role}</td>
+      <td>${p.team}</td>
+      <td>${p.matches}</td>
+      <td>${p.runs}</td>
+      <td>${p.wickets}</td>
+      <td class="actions">
+        <a href="/players/${p._id}/edit">Edit</a>
+        <form
+          method="post"
+          action="/players/${p._id}?_method=DELETE"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    `).join('')}
+  </tbody>
+</table>
+` }) %>

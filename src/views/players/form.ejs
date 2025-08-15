@@ -1,0 +1,43 @@
+<%- include('../layout', { body: `
+  <h2>${title}</h2>
+  ${typeof errors !== 'undefined' ? `<ul>${errors.map(e => `<li>${e.msg}</li>`).join('')}</ul>` : ''}
+
+  <form method="post" action="${action}">
+    <label>Name</label><br/>
+    <input name="name" value="${player.name || ''}" required />
+
+    <label>Role</label><br/>
+    <select name="role">
+      ${["Batsman","Bowler","All-Rounder","Wicket-Keeper"].map(r => `
+        <option value="${r}" ${player.role===r ? 'selected':''}>${r}</option>
+      `).join('')}
+    </select>
+
+    <label>Batting Style</label><br/>
+    <select name="battingStyle">
+      ${["RHB","LHB"].map(s => `<option ${player.battingStyle===s?'selected':''}>${s}</option>`).join('')}
+    </select>
+
+    <label>Bowling Style</label><br/>
+    <select name="bowlingStyle">
+      ${["Off-spin","Leg-spin","Left-arm Orthodox","Right-arm Fast","Left-arm Fast","None"].map(s => `
+        <option ${player.bowlingStyle===s?'selected':''}>${s}</option>`).join('')}
+    </select>
+
+    <label>Team</label><br/><input name="team" value="${player.team || ''}" />
+
+    <label>Matches</label><br/><input type="number" name="matches" value="${player.matches ?? 0}" />
+
+    <label>Runs</label><br/><input type="number" name="runs" value="${player.runs ?? 0}" />
+
+    <label>Wickets</label><br/><input type="number" name="wickets" value="${player.wickets ?? 0}" />
+
+    <label>Average</label><br/><input type="number" step="0.01" name="average" value="${player.average ?? 0}" />
+
+    <label>Strike Rate</label><br/><input type="number" step="0.01" name="strikeRate" value="${player.strikeRate ?? 0}" />
+
+    <label>Economy</label><br/><input type="number" step="0.01" name="economy" value="${player.economy ?? 0}" />
+
+    <br/><button type="submit">Save</button>
+  </form>
+` }) %>

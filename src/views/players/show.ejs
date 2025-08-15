@@ -1,0 +1,30 @@
+<%- include('../layout', { body: `
+<h2>${player.name}</h2>
+<p><strong>Role:</strong> ${player.role}</p>
+<p><strong>Team:</strong> ${player.team}</p>
+<p>
+  <strong>Batting:</strong> ${player.battingStyle} |
+  <strong>Bowling:</strong> ${player.bowlingStyle}
+</p>
+<p>
+  <strong>Matches:</strong> ${player.matches} |
+  <strong>Runs:</strong> ${player.runs} |
+  <strong>Wickets:</strong> ${player.wickets}
+</p>
+<p>
+  <strong>Avg:</strong> ${player.average} |
+  <strong>SR:</strong> ${player.strikeRate} |
+  <strong>Econ:</strong> ${player.economy}
+</p>
+<div class="actions">
+  <a href="/players/${player._id}/edit">Edit</a>
+  <form
+    method="post"
+    action="/players/${player._id}?_method=DELETE"
+    style="display: inline"
+  >
+    <button type="submit">Delete</button>
+  </form>
+  <a href="/players">Back</a>
+</div>
+` }) %>
